@@ -1,3 +1,5 @@
+import os
+import sys
 from tkinter import *
 from tkinter import messagebox
 from tkinter import Entry
@@ -45,8 +47,8 @@ def countdown(count):
         FPSLabel.destroy()
         MsgBox = messagebox.askquestion (message="gefeliciteerd, je hebt " + str(Score) + " punten gescoord! wil je opnieuw?")
         if MsgBox == 'yes':
-            Score = 0
-            SpelScherm()
+            python = sys.executable
+            os.execl(python, python, * sys.argv)
         else:
             root.destroy()
 
