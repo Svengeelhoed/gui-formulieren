@@ -3,8 +3,6 @@ root = Tk()
 x = 0
 y = 1
 row = 1
-root.columnconfigure(index=10,weight=10)
-root.rowconfigure(index=10,weight=10)
 
 def LabelMaker(x,y):
     global row
