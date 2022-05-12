@@ -16,8 +16,8 @@ DateString = Label(text="Date:",font=20)
 ComboBoxMaand = Combobox(root, width=8)
 ComboBoxDag = Combobox(root, width=8)
 GoButton = Button(root, text="go")
-dash1 = Label(text="-")
-dash2 = Label(text="-")
+Dash1 = Label(text="-")
+Dash2 = Label(text="-")
 DateString.place(x=125)
 ComboBoxMaand.place(x=115, y= 60)
 ComboBoxDag.place(x=20, y= 60)
@@ -25,8 +25,8 @@ JaarEntry=Entry(root, width=8)
 JaarEntry.insert(END, str(datetime.now().strftime("%Y")))
 JaarEntry.place(x=210, y=61)
 GoButton.place(x = 140, y = 110)
-dash1.place(x=98, y=60)
-dash2.place(x=193, y=60)
+Dash1.place(x=98, y=60)
+Dash2.place(x=193, y=60)
 ComboBoxDag["values"]=DagList
 ComboBoxMaand["values"]=MaandList
 ComboBoxDag.set(datetime.now().strftime("%d"))
@@ -39,11 +39,11 @@ def GoButtonFunc():
     Tijd2 = datetime.now().date()
     # print(Tijd1)
     # print(Tijd2)
-    TimeCalc(Tijd1, Tijd2)
+    TimeDiffMessageBox(TimeCalc(Tijd1, Tijd2))
     
 def TimeCalc(Tijd1, Tijd2):    
     TimeDiff = (Tijd1 - Tijd2).days
-    TimeDiffMessageBox(TimeDiff)
+    return TimeDiff
 
 def TimeDiffMessageBox(TimeDiff):
     if int(TimeDiff) == 0:
