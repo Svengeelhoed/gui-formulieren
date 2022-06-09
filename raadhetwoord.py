@@ -1,4 +1,3 @@
-from os import remove
 from tkinter import *
 from tkinter import messagebox
 import string
@@ -10,15 +9,11 @@ root.title("Raad het woord")
 root.geometry("250x400")
 root.AantalPunten = 0
 
-alphabetlist = list(string. ascii_lowercase)
-sv_list = []
+AlphabetList = list(string. ascii_lowercase)
+SvList = []
 WoordAntwoord = []
 AantalLetters = 0
 SpinboxList = []
-
-alphabetlist = list(string. ascii_lowercase)
-sv_list = []
-WoordAntwoord = []
 GoButton = Button(root, text="Go", width = 10)
 WoordEntry = Entry(root, width = 10)
 DoneButton = Button(root, text="Done", width= 10)
@@ -35,21 +30,21 @@ GoButton.pack(pady=40)
 #     GoButton.pack(pady=40)
 
 def GoButtonFunc():
-    global DoneButton, WoordEntry,HetWoordList,AantalLetters,PuntenLabel,Spinboxes,SpinboxValues,WoordEntryStr
+    global HetWoordList,AantalLetters,PuntenLabel,Spinboxes,SpinboxValues,WoordEntryStr
     HetWoordList = list(WoordEntry.get())
     root.HetWoordStr = WoordEntry.get()
     root.AantalPunten = len(HetWoordList) * len(HetWoordList)
     PuntenLabel = Label(text="Punten: " + str(root.AantalPunten))
     PuntenLabel.pack()
     for i in range(len(HetWoordList)):
-        sv_list.append(StringVar(root))
+        SvList.append(StringVar(root))
     if len(WoordEntry.get()) >= 4 and len(WoordEntry.get()) <= 9:
         for i in range(len(WoordEntry.get())):
             SpinboxValues = list(HetWoordList[i])
             for e in range(4):
-                SpinboxValues.append(random.choice(alphabetlist))
+                SpinboxValues.append(random.choice(AlphabetList))
             shuffle(SpinboxValues)
-            Spinboxes = Spinbox(root, values=SpinboxValues, textvariable=sv_list[i])
+            Spinboxes = Spinbox(root, values=SpinboxValues, textvariable=SvList[i])
             SpinboxList.append(Spinboxes)
             Spinboxes.pack(pady=10)
         DoneButton.pack(pady=20)
@@ -64,7 +59,7 @@ def DoneButtonFunc():
     WoordAntwoord = []
     AantalGoed = 0
     for i in range(len(HetWoordList)):
-        WoordAntwoord.append(sv_list[i].get())
+        WoordAntwoord.append(SvList[i].get())
         if WoordAntwoord[i] == HetWoordList[i]:
             AantalGoed += 1
         else:
@@ -72,8 +67,7 @@ def DoneButtonFunc():
             PuntenLabel.configure(text="Punten: " + str(root.AantalPunten))
     if AantalGoed < len(HetWoordList):
         AantalFout = len(HetWoordList) - AantalGoed
-        print(messagebox.showinfo(message="Helaas, je hebt " + str(AantalFout) + " letters fout!"))
-
+        messagebox.showinfo(message="Helaas, je hebt " + str(AantalFout) + " letters fout!")
     if AantalGoed == len(HetWoordList):
         messagebox.showinfo(message="gefeliciteerd, je hebt het woord geraden!")
         root.after(2000)
